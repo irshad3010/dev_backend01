@@ -27,6 +27,8 @@ let obj ={
    'name': 'Irshad'
 }
 
+// client jab server se magwata ah 
+
 app.get('/user' , (req , res)=>{
     console.log('users');
      res.send(obj);
@@ -36,3 +38,4 @@ app.get('/home' , (req , res)=>{
     console.log('users');
      res.sendFile('./views/index.html' , {root:__dirname});
 });
+
