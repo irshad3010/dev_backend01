@@ -9,9 +9,13 @@ app.listen('5000', function(){
 });
 
 app.use(express.json()); // functon middleware function
-
+app.use(express.static('public')); // only want index.html to show public
 const userRouter = express.Router();
+const authRouter = express.Router();
+
+
 app.use('/user' , userRouter);
+app.use('/auth' , authRouter)
   // mounting in express
 userRouter
 .route('/')
@@ -24,8 +28,13 @@ userRouter
 .route(': id')
 .get(getUserById);
 
+authRouter
+.route('/signup')
+.post(signupUser);
 
-let user = {};
+
+
+let user = [];
 
 // client <- server
 //crud - create read update and delete
@@ -78,3 +87,27 @@ function getUserById (req , res){
     res.send(req.params.id);
    
    }
+
+
+function signupUser(req , res){
+    let userDetails = req.body;    // destructing using let{email , name , password} = req.body;
+    let name = userDetails.name;
+    let email = userDetails.email;
+    let password = userDetails.password;
+    user.push({email , name , password});
+
+    console.log('user' , req.body);
+    res.json({
+           message: 'user signedUp',
+           user: req.body
+    });
+}
+
+
+
+
+
+
+
+
+
